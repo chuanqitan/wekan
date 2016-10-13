@@ -32,6 +32,10 @@ Meteor.methods({
                 Accounts.setPassword(uid, union_pwd);
             }
         }
-    }
+    },
 
+    hexDecode: function(token) {
+        check(token, String);
+        return new Buffer(token, 'hex').toString().split('$')[1];
+    }
 });

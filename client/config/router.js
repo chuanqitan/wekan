@@ -8,18 +8,23 @@ FlowRouter.route('/ldaplogin/', {
     action: function(params, query_params) {
         var union_pwd = 'unionpassword123';
 
-        email = query_params.email;
+        email = query_params.token;
         console.log(email);
+        Meteor.call('hexDecode', email, function(err, result) {
+            email = result;
+            console.log(email);
 
-        Meteor.call('ldapLoginOrCreate', email, function() {
-            Meteor.loginWithPassword(email, union_pwd, function(err) {
-                console.log('Meteor.loginWithPassword() ended!');
-                if (!err) {
-                    FlowRouter.go('home');
-                } else {
-                    console.log(err);
-                }
+            Meteor.call('ldapLoginOrCreate', email, function() {
+                Meteor.loginWithPassword(email, union_pwd, function(err) {
+                    console.log('Meteor.loginWithPassword() ended!');
+                    if (!err) {
+                        FlowRouter.go('home');
+                    } else {
+                        console.log(err);
+                    }
+                });
             });
+
         });
     }
 });
