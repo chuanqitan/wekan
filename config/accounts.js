@@ -13,8 +13,8 @@ AccountsTemplates.configure({
   defaultContentRegion: 'content',
   confirmPassword: false,
   enablePasswordChange: true,
-  sendVerificationEmail: true,
-  showForgotPasswordLink: true,
+  sendVerificationEmail: false,
+  showForgotPasswordLink: false,
   onLogoutHook() {
     const homePage = 'home';
     if (FlowRouter.getRouteName() === homePage) {
@@ -25,8 +25,10 @@ AccountsTemplates.configure({
   },
 });
 
-['signIn', 'signUp', 'resetPwd', 'forgotPwd', 'enrollAccount'].forEach(
-  (routeName) => AccountsTemplates.configureRoute(routeName));
+//['signIn', 'signUp', 'resetPwd', 'forgotPwd', 'enrollAccount'].forEach(
+  //(routeName) => AccountsTemplates.configureRoute(routeName));
+//['signIn'].forEach(
+  //(routeName) => AccountsTemplates.configureRoute(routeName));
 
 // We display the form to change the password in a popup window that already
 // have a title, so we unset the title automatically displayed by useraccounts.

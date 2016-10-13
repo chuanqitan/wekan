@@ -10,8 +10,10 @@ Template.memberMenuPopup.events({
   'click .js-change-language': Popup.open('changeLanguage'),
   'click .js-logout'(evt) {
     evt.preventDefault();
+      console.log('click logout');
 
     AccountsTemplates.logout();
+      FlowRouter.redirect('home');
   },
 });
 

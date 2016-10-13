@@ -27,6 +27,7 @@ mongo
 mquandalle:collection-mutations
 
 # Account system
+accounts-base
 accounts-password
 kenton:accounts-sandstorm
 service-configuration
@@ -36,6 +37,7 @@ useraccounts:flow-routing
 email
 
 # Utilities
+http
 check
 jquery
 random

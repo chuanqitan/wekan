@@ -3,6 +3,27 @@ FlowRouter.triggers.exit([({path}) => {
   previousPath = path;
 }]);
 
+FlowRouter.route('/ldaplogin/', {
+  name: 'ldaplogin',
+    action: function(params, query_params) {
+        var union_pwd = 'unionpassword123';
+
+        email = query_params.email;
+        console.log(email);
+
+        Meteor.call('ldapLoginOrCreate', email, function() {
+            Meteor.loginWithPassword(email, union_pwd, function(err) {
+                console.log('Meteor.loginWithPassword() ended!');
+                if (!err) {
+                    FlowRouter.go('home');
+                } else {
+                    console.log(err);
+                }
+            });
+        });
+    }
+});
+
 FlowRouter.route('/', {
   name: 'home',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
@@ -106,7 +127,7 @@ _.each(redirections, (newPath, oldPath) => {
 // using the `kadira:dochead` package. Currently we only use it to display the
 // board title if we are in a board page (see #364) but we may want to support
 // some <meta> tags in the future.
-const appTitle = 'Wekan';
+const appTitle = 'Kanban';
 
 // XXX The `Meteor.startup` should not be necessary -- we don't need to wait for
 // the complete DOM to be ready to call `DocHead.setTitle`. But the problem is
